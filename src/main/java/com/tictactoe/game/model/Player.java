@@ -1,4 +1,4 @@
-package com.tictactoe.game.domain;
+package com.tictactoe.game.model;
 
 import lombok.Data;
 

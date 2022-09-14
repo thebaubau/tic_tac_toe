@@ -1,6 +1,7 @@
-package com.tictactoe.game.domain;
+package com.tictactoe.game.model;
 
-import lombok.AllArgsConstructor;
+import com.tictactoe.game.view.BoardUi;
+import com.tictactoe.game.view.ConsoleMessages;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -12,33 +13,37 @@ public class Round {
 
     private final List<Player> players;
     private final Board board = new Board();
+    private final BoardUi boardUi = new BoardUi();
     private final Scanner scanner = new Scanner(System.in);
+
+    private final ConsoleMessages consoleMessages = new ConsoleMessages();
 
     public void playRound(){
         Player currentPlayer = playerToStartRound();
 
-        System.out.println("Player " + currentPlayer.getName() + " starts.");
+        consoleMessages.startingPlayer(currentPlayer);
+
+        boardUi.drawBoard(board.getBoard());
 
         while (true){
-            System.out.println(currentPlayer.getName() + " select a position: ");
+            consoleMessages.playerSelectPosition(currentPlayer);
+
             int position = scanner.nextInt();
 
             if (board.isPositionTaken(position)){
                 position = scanner.nextInt();
             }
 
-            System.out.println(currentPlayer.getName() + " selected " +
-                    position + " with sign " + currentPlayer.getSign());
+            consoleMessages.printSelectedPosition(currentPlayer, position);
 
             board.getBoard()[position] = currentPlayer.getSign();
-            board.drawBoard();
+
+            boardUi.drawBoard(board.getBoard());
 
             if (board.gameIsDone(currentPlayer.getSign())){
-                System.out.println("Player " + currentPlayer.getName() + " WINS!");
-
+                consoleMessages.printWinner(currentPlayer);
                 break;
             }
-
 
             currentPlayer = getNextPlayer(currentPlayer);
         }

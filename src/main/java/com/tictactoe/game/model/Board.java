@@ -1,5 +1,6 @@
-package com.tictactoe.game.domain;
+package com.tictactoe.game.model;
 
+import com.tictactoe.game.view.ConsoleMessages;
 import lombok.Data;
 
 @Data
@@ -9,9 +10,7 @@ public class Board {
     // 3, 4, 5
     // 6, 7, 8
 
-    // TicTacToe has 3x3 squares. We start with an empty list and continue to add while
-    // the game progresses to positions, so position 0 is row 1, column 1
-
+    private ConsoleMessages consoleMessages = new ConsoleMessages();
     private String[] board = {"", "", "", "", "", "", "", "", ""};
 
     public boolean gameIsDone(String sign) {
@@ -50,17 +49,9 @@ public class Board {
         return false;
     }
 
-    public void drawBoard() {
-        System.out.println("   " + board[0] + " | " + board[1] + " | " + board[2] + " " );
-        System.out.println("--- + --- + ---");
-        System.out.println(" " + board[3] + " | " + board[4] + " | " + board[5] + " " );
-        System.out.println("--- + --- + ---");
-        System.out.println(" " + board[6] + " | " + board[7] + " | " + board[8] + " " );
-    }
-
     public boolean isPositionTaken(int position) {
         if (!board[position].isEmpty()) {
-            System.out.println("Position already has a sign. Select another: ");
+            consoleMessages.positionTaken();
             return true;
         }
 
