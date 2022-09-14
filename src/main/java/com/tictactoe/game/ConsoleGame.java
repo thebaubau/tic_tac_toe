@@ -3,7 +3,6 @@ package com.tictactoe.game;
 import com.tictactoe.game.domain.Player;
 import com.tictactoe.game.domain.Round;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,12 +18,7 @@ public class ConsoleGame {
         System.out.println("Player two name:");
         Player playerTwo = new Player(scanner.nextLine(), "O");
 
-        ArrayList<Player> players = new ArrayList<Player>();
-
-        players.add(playerOne);
-        players.add(playerTwo);
-
-        Round round = new Round(players);
+        Round round = new Round(List.of(playerOne, playerTwo));
         round.playRound();
 
     }
