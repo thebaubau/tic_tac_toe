@@ -11,4 +11,6 @@ public interface IMessages {
     void printSelectedPosition(Player player, int position);
     void printWinner(Player player);
     void positionTaken();
+    void positionValid();
+    void gameIsADraw();
 }

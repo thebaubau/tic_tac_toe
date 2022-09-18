@@ -2,7 +2,6 @@ package com.tictactoe.game.controller;
 
 import com.tictactoe.game.model.Player;
 import com.tictactoe.game.model.Round;
-import com.tictactoe.game.view.BoardUi;
 import com.tictactoe.game.view.ConsoleMessages;
 
 import java.util.List;

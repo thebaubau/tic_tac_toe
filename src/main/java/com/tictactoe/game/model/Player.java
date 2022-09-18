@@ -2,13 +2,22 @@ package com.tictactoe.game.model;
 
 import lombok.Data;
 
+import java.util.Scanner;
+
 @Data
 public class Player {
     private final String name;
     private final String sign;
 
-    public int placeSign(int location) {
+    private final Scanner scanner = new Scanner(System.in);
 
-        return location;
+    public int placeSign(Board board) {
+        int position = scanner.nextInt();
+
+        if (board.isPositionTaken(position) || board.isValidPosition(position)){
+            position = scanner.nextInt();
+        }
+
+        return position;
     }
 }

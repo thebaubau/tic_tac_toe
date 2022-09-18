@@ -11,47 +11,51 @@ public class Board {
     // 6, 7, 8
 
     private ConsoleMessages consoleMessages = new ConsoleMessages();
-    private String[] board = {"", "", "", "", "", "", "", "", ""};
 
-    public boolean gameIsDone(String sign) {
-        if (board[0].equals(sign) && board[1].equals(sign) && board[2].equals(sign)){
-            return true;
+    private String[] board = {" ", " ", " ", " ", " ", " ", " ", " ", " "};
+
+    private int[][] winningPositions =
+            {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6},
+            {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
+
+    public boolean isPlayerVictorious(String sign) {
+        for (int[] winningPosition : winningPositions) {
+            int magicalThree = 0;
+
+            for (int i : winningPosition) {
+                if (board[i].equals(sign)) {
+                    magicalThree += 1;
+                }
+            }
+
+            if (magicalThree == 3) return true;
         }
 
-        if (board[3].equals(sign) && board[4].equals(sign) && board[5].equals(sign)){
-            return true;
-        }
+        return false;
+    }
 
-        if (board[6].equals(sign) && board[7].equals(sign) && board[8].equals(sign)){
-            return true;
+    public boolean isBoardFull(){
+        for (String s : board) {
+            if (s.matches("\\s")) {
+                return false;
+            }
         }
+        consoleMessages.gameIsADraw();
+        return true;
+    }
 
-        if (board[0].equals(sign) && board[3].equals(sign) && board[6].equals(sign)){
-            return true;
-        }
-
-        if (board[1].equals(sign) && board[4].equals(sign) && board[7].equals(sign)){
-            return true;
-        }
-
-        if (board[2].equals(sign) && board[5].equals(sign) && board[8].equals(sign)){
-            return true;
-        }
-
-        if (board[0].equals(sign) && board[4].equals(sign) && board[8].equals(sign)){
-            return true;
-        }
-
-        if (board[2].equals(sign) && board[4].equals(sign) && board[6].equals(sign)){
+    public boolean isPositionTaken(int position) {
+        if (!board[position].matches("\\s")) {
+            consoleMessages.positionTaken();
             return true;
         }
 
         return false;
     }
 
-    public boolean isPositionTaken(int position) {
-        if (!board[position].isEmpty()) {
-            consoleMessages.positionTaken();
+    public boolean isValidPosition(int position) {
+        if (position < 0 || position > 8) {
+            consoleMessages.positionValid();
             return true;
         }
 
