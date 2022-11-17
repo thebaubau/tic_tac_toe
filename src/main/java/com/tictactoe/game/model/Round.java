@@ -21,14 +21,14 @@ public class Round {
 
         consoleMessages.startingPlayer(currentPlayer);
 
-        boardUi.drawBoard(board.getBoard());
+//        boardUi.drawBoard(board.getBoard());
 
         while (true){
             consoleMessages.playerSelectPosition(currentPlayer);
 
             selectPosition(currentPlayer);
 
-            boardUi.drawBoard(board.getBoard());
+//            boardUi.drawBoard(board.getBoard());
 
             if (isRoundOver(currentPlayer)) break;
 
@@ -50,7 +50,7 @@ public class Round {
 
         consoleMessages.printSelectedPosition(currentPlayer, position);
 
-        board.getBoard()[position] = currentPlayer.getSign();
+//        board.getBoard()[position] = currentPlayer.getSign();
     }
 
     private Player playerToStartRound() {
