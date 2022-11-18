@@ -7,15 +7,12 @@ import org.springframework.aop.PointcutAdvisor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Data
 public class Board {
-    // The board:
-    // 0, 1, 2
-    // 3, 4, 5
-    // 6, 7, 8
 
     private ConsoleMessages consoleMessages = new ConsoleMessages();
 
@@ -23,11 +20,18 @@ public class Board {
     private int boardRowsCount = 3;
     private int boardColumnsCount = 3;
 
-    public String getPointValue(int column, int row) {
-        Predicate<Point> point = p -> p.x == column && p.y == row;
+    public Board() {
+        createBoard();
+    }
 
-        return board.stream().filter(point).findAny().get().initialValue;
+    public String getPointValue(int col, int row) {
+        Predicate<Point> point = p -> p.x == col && p.y == row;
 
+        return board.stream()
+                .filter(point)
+                .findAny()
+                .map(p -> p.value)
+                .orElseThrow(() -> new NoSuchElementException("No value at selected position"));
     }
 
     public void createBoard() {
@@ -42,12 +46,14 @@ public class Board {
         for (int i = 0; i < boardColumnsCount; i++) {
             board.add(new Point(i, boardRowsCount - 1));
         }
+        boardRowsCount++;
     }
 
     public void addColumn(){
         for (int i = 0; i < boardRowsCount; i++) {
             board.add(new Point(boardColumnsCount - 1, i));
         }
+        boardColumnsCount++;
     }
 
 
@@ -83,7 +89,7 @@ public class Board {
 
     public boolean isBoardFull(){
         for (Point point : board) {
-            if (!point.initialValue.matches("[XO]")) {
+            if (!point.value.matches("[XO]")) {
                 return false;
             }
         }
@@ -109,10 +115,4 @@ public class Board {
 
         return false;
     }
-}
-@AllArgsConstructor
-class Point {
-    public int x;
-    public int y;
-    public final String initialValue = "-";
 }
