@@ -24,16 +24,6 @@ public class Board {
         createBoard();
     }
 
-    public String getPointValue(int col, int row) {
-        Predicate<Point> point = p -> p.x == col && p.y == row;
-
-        return board.stream()
-                .filter(point)
-                .findAny()
-                .map(p -> p.value)
-                .orElseThrow(() -> new NoSuchElementException("No value at selected position"));
-    }
-
     public void createBoard() {
         for (int i = 0; i < boardColumnsCount; i++) {
             for (int j = 0; j < boardRowsCount; j++) {
@@ -54,6 +44,23 @@ public class Board {
             board.add(new Point(boardColumnsCount - 1, i));
         }
         boardColumnsCount++;
+    }
+
+    public Point getPoint(int row, int col) {
+        Predicate<Point> point = p -> p.x == row && p.y == col;
+
+        return board.stream()
+                .filter(point)
+                .findAny()
+                .orElseThrow(() -> new NoSuchElementException("No value at selected position"));
+    }
+
+    public String getPointValue(int row, int col) {
+        return getPoint(row, col).value;
+    }
+
+    public void setPointValue(int row, int col, String sign) {
+        getPoint(row, col).value = sign;
     }
 
 

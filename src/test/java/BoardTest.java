@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -68,6 +69,22 @@ class BoardTest {
 
         // Then
         assertThrows(NoSuchElementException.class, () -> board.getPointValue(4, 4));
+    }
+
+    @Test
+    void boardCanHaveValuesAssigned() {
+        // Given
+        Board board = new Board();
+
+        // When
+        board.setPointValue(0, 0, "X");
+        board.setPointValue(0, 1, "O");
+        board.setPointValue(1, 2, "X");
+
+        // Then
+        assertEquals(board.getPointValue(0, 0), "X");
+        assertEquals(board.getPointValue(0, 1), "O");
+        assertEquals(board.getPointValue(1, 2), "X");
     }
 
 }
