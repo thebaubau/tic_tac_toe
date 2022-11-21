@@ -1,15 +1,12 @@
 package com.tictactoe.game.model;
 
 import com.tictactoe.game.view.ConsoleMessages;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.aop.PointcutAdvisor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @Data
 public class Board {
@@ -105,17 +102,19 @@ public class Board {
         return true;
     }
 
-    public boolean isPositionTaken(int position) {
-//        if (!board.get(position).matches("[XO]")) {
-//            consoleMessages.positionTaken();
-//            return true;
-//        }
+    public boolean isPositionTaken(int row, int col) {
+        if (getPointValue(row, col).matches("XO")){
+            consoleMessages.positionTaken();
+            return true;
+        }
 
         return false;
     }
 
-    public boolean isValidPosition(int position) {
-        if (position < 0 || position > 8) {
+    public boolean isInvalidPosition(int row, int col) {
+        if (row < 0 || row >= boardRowsCount ||
+            col < 0 || col >= boardColumnsCount) {
+
             consoleMessages.positionValid();
             return true;
         }

@@ -11,13 +11,15 @@ public class Player {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public int placeSign(Board board) {
-        int position = scanner.nextInt();
+    public int[] placeSign(Board board) {
+        int row = scanner.nextInt();
+        int column = scanner.nextInt();
 
-        if (board.isPositionTaken(position) || board.isValidPosition(position)){
-            position = scanner.nextInt();
+        if (board.isPositionTaken(row, column) || board.isInvalidPosition(row, column)){
+            row = scanner.nextInt();
+            column = scanner.nextInt();
         }
 
-        return position;
+        return new int[] {row, column};
     }
 }

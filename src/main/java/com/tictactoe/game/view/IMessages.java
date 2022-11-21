@@ -8,7 +8,7 @@ public interface IMessages {
     void playerTwo();
     void startingPlayer(Player player);
     void playerSelectPosition(Player player);
-    void printSelectedPosition(Player player, int position);
+    void printSelectedPosition(Player player, int row, int column);
     void printWinner(Player player);
     void positionTaken();
     void positionValid();

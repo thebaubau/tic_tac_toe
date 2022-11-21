@@ -1,5 +1,6 @@
 package com.tictactoe.game.model;
 
+import com.tictactoe.game.utils.CoordinatesConverter;
 import com.tictactoe.game.view.BoardUi;
 import com.tictactoe.game.view.ConsoleMessages;
 import lombok.RequiredArgsConstructor;
@@ -21,14 +22,14 @@ public class Round {
 
         consoleMessages.startingPlayer(currentPlayer);
 
-//        boardUi.drawBoard(board.getBoard());
+        boardUi.drawBoard(board);
 
         while (true){
             consoleMessages.playerSelectPosition(currentPlayer);
 
             selectPosition(currentPlayer);
 
-//            boardUi.drawBoard(board.getBoard());
+            boardUi.drawBoard(board);
 
             if (isRoundOver(currentPlayer)) break;
 
@@ -46,11 +47,11 @@ public class Round {
     }
 
     private void selectPosition(Player currentPlayer) {
-        int position = currentPlayer.placeSign(board);
+        int[] position = currentPlayer.placeSign(board);
 
-        consoleMessages.printSelectedPosition(currentPlayer, position);
+        consoleMessages.printSelectedPosition(currentPlayer, position[0], position[1]);
 
-//        board.getBoard()[position] = currentPlayer.getSign();
+        board.setPointValue(position[0], position[1], currentPlayer.getSign());
     }
 
     private Player playerToStartRound() {

@@ -2,6 +2,8 @@ package com.tictactoe.game.view;
 
 import com.tictactoe.game.model.Player;
 
+import java.text.MessageFormat;
+
 public class ConsoleMessages implements IMessages{
 
     @Override
@@ -26,13 +28,15 @@ public class ConsoleMessages implements IMessages{
 
     @Override
     public void playerSelectPosition(Player player) {
-        System.out.println(player.getName() + " select a position: ");
+        System.out.println(player.getName() + " select a row and column: ");
     }
 
     @Override
-    public void printSelectedPosition(Player player, int position) {
-        System.out.println(player.getName() + " selected " +
-                position + " with sign " + player.getSign());
+    public void printSelectedPosition(Player player, int row, int col) {
+        String message = MessageFormat.format("{0} selected row {1} and column {2} with sign {3}",
+                player.getName(), row, col, player.getSign());
+
+        System.out.println(message);
     }
 
     @Override
