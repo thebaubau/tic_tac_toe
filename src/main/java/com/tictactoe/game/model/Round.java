@@ -47,11 +47,11 @@ public class Round {
     }
 
     private void selectPosition(Player currentPlayer) {
-        int[] position = currentPlayer.placeSign(board);
+        List<Integer> position = currentPlayer.placeSign(board);
 
-        consoleMessages.printSelectedPosition(currentPlayer, position[0], position[1]);
+        consoleMessages.printSelectedPosition(currentPlayer, position.get(0), position.get(1));
 
-        board.setPointValue(position[0], position[1], currentPlayer.getSign());
+        board.setPointValue(position.get(0), position.get(1), currentPlayer.getSign());
     }
 
     private Player playerToStartRound() {

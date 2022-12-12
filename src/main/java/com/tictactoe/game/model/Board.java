@@ -112,9 +112,10 @@ public class Board {
     }
 
     public boolean isInvalidPosition(int row, int col) {
-        if (row < 0 || row >= boardRowsCount ||
-            col < 0 || col >= boardColumnsCount) {
-
+        if (!Character.isDigit(col) ||
+            row < 0 || row >= boardRowsCount ||
+            col < 0 || col >= boardColumnsCount)
+        {
             consoleMessages.positionValid();
             return true;
         }

@@ -2,21 +2,27 @@ package com.tictactoe.game.view;
 
 import com.tictactoe.game.model.Board;
 
-import java.net.SocketOption;
-import java.util.List;
-
 public class BoardUi {
+
     public void drawBoard(Board board) {
+        System.out.println("+-----+-----+-----+");
+
         for (int i = 0; i < board.getBoardRowsCount(); i++) {
             for (int j = 0; j < board.getBoardColumnsCount(); j++) {
-                System.out.println(" " + board.getPointValue(i, j) + " ");
+
+                System.out.print("|");
+                System.out.print("  " + board.getPointValue(i, j) + "  ");
+
+                if (j == board.getBoardColumnsCount() - 1) {
+                    System.out.print("|");
+                }
+
+                if (j > 0 && j % (board.getBoardColumnsCount() - 1) == 0) {
+                    System.out.println("\n+-----+-----+-----+");
+                    break;
+                }
             }
         }
-
-//        System.out.println(" " + board[00] + "  |  " + board[01] + "  |  " + board[02] + " " );
-//        System.out.println("--- + --- + ---");
-//        System.out.println(" " + board[3] + "  |  " + board[4] + "  |  " + board[5] + " " );
-//        System.out.println("--- + --- + ---");
-//        System.out.println(" " + board[6] + "  |  " + board[7] + "  |  " + board[8] + " " );
     }
+
 }
